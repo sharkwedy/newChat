@@ -14,10 +14,10 @@ app.set('port', process.env.PORT || 3000);
 
 // view setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.engine('ejs', require('ejs').renderFile);
+app.set('view engine', 'ejs');
 
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
