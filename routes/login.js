@@ -27,11 +27,9 @@ router.post('/login',
     var positionUser = authentication(req.body.username, req.body.password);
     if( positionUser >= 0 ) {
       global.users[positionUser].status ='online';
-      console.log("id");
       res.redirect('/chat');
     }
     else {
-
       console.log("/");
       res.redirect('/');
     }
@@ -44,6 +42,12 @@ router.get('/chat', function(req, res){
 
 router.get('/', function(req, res, next) {
   res.render('login');
+});
+
+router.get('/logout', function(req, res) {
+  //var positionUser = req.params.id;
+  //global.users[positionUser].status ='offline';
+  res.redirect('/');
 });
 
 module.exports = router;
