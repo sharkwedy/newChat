@@ -26,6 +26,7 @@
 				});
 				
 				$("#exibe_participantes").click(function(){
+					socket.emit('atualizaUsers');
 					$("#participantes").show();
 					$("#conversa").hide();
 					ocultaNavbar();
@@ -65,6 +66,9 @@
 						<li>
 							<a href="#" id="exibe_participantes">Usuários</a>
 						</li>
+						<li>
+							<a href="#" id="logout">Sair</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -82,13 +86,7 @@
 			<div class="row participantes" id="participantes" style="display:none">
 				<div class="col-md-1"></div>
 				<div class="col-md-10" id="pessoas">
-
-					<span class="participante">
-						<img src="images/ico_usuario.png">
-						<%for(var i=0;i < usuarios.length;i++) { %>
-							<%= usuarios[i].userName %> - <%= usuarios[i].status%>	
-						<%}%>
-					</span>
+					
 				</div>
 				<div class="col-md-1"></div>
                 
@@ -126,12 +124,12 @@
 					{ 
 						apelido: $('#apelido').val(), 
 						mensagem: $('#mensagem').val(),
-						apelido_atualizado_nos_clientes : $('#apelido_atualizado_nos_clientes').val()
+						//apelido_atualizado_nos_clientes : $('#apelido_atualizado_nos_clientes').val()
 					}
 				);	
 
 				$('#mensagem').val("");
-				$('#apelido_atualizado_nos_clientes').val(1);
+				//$('#apelido_atualizado_nos_clientes').val(1);
 				}
 			});
 			
@@ -157,16 +155,20 @@
 			});
 
 
-			socket.on('participantesParaCliente', function(data){
+			socket.on('atualizaUsersCliente', function(data){
 				var html = '';
-
-				html += '<span class="participante">';
-					html += '<img src="images/ico_usuario.png">';
-					html += data.apelido;	
-					html += " - Online";
-				html += '</span>';
-
-				$('#pessoas').append(html);
+				for(var i=0;i < data.usuarios.length;i++) {
+					html += '<span class="participante">';
+						html += '<p>';
+						html += 'Usuário: ';
+						html += data.usuarios[i].userName;
+						html += '<br/> Status: ';
+						html += data.usuarios[i].status;
+						html += '</p>';
+					html += '</span>';
+				}
+				
+				$('#pessoas').html(html);
 			});
 		</script>
 	</body>

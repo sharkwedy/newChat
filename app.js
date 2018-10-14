@@ -54,21 +54,35 @@ io.on('connection', function(socket){
 			'msgParaCliente', 
 			{apelido: data.apelido, mensagem: data.mensagem}
 		);
+	});
 
-		/* participantes */
-		if(parseInt(data.apelido_atualizado_nos_clientes) == 0){
-			socket.emit(
-				'participantesParaCliente', 
-				{apelido: data.apelido}
-			);
+	socket.on('atualizaUsers', function(){
 
-			socket.broadcast.emit(
-				'participantesParaCliente', 
-				{apelido: data.apelido}
-			);
-		}
+		/* dialogo */
+		socket.emit(
+			'atualizaUsersCliente', 
+			{usuarios: global.users}
+		);
+
+		socket.broadcast.emit(
+			'atualizaUsersCliente', 
+			{usuarios: global.users}
+		);
 	});
 
 });
 
 module.exports = app;
+
+/* participantes 
+	if(parseInt(data.apelido_atualizado_nos_clientes) == 0){
+		socket.emit(
+			'participantesParaCliente', 
+			{apelido: data.apelido}
+		);
+
+		socket.broadcast.emit(
+			'participantesParaCliente', 
+			{apelido: data.apelido}
+		);
+	}*/
