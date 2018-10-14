@@ -26,4 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', loginRouter);
 app.use('/newUser', newUserRouter);
 
+app.listen(app.get('port'), () => {
+    console.log('Server on port', app.get('port'));
+});
+
 module.exports = app;
