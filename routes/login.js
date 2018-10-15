@@ -30,13 +30,12 @@ router.post('/login',
       res.render('chat', { usuarios: global.users , id: positionUser});
     }
     else {
-      console.log("/");
       res.redirect('/');
     }
   }
 );
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('login');
 });
 

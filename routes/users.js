@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('cadastro');
 });
 
@@ -12,16 +12,12 @@ router.post('/',
       password: req.body.password,
       status: 'offline'
     };
-    var flag = true;
     for(var i=0;i<global.users.length;i++) {
       if(user.userName==global.users[i].userName) {
-        flag = false;
         res.redirect('/');
       }
     }
-    if(flag) {
-      global.users.push(user);  
-    }
+    global.users.push(user);
     res.redirect('/');
   }
 );
