@@ -1,16 +1,11 @@
 @charset "utf-8";
 
-@media only screen and (orientation: Portrait) {
-	
-}
-
 body {
     background-color: #444;
-    background: url('/images/logoUb.png');  
 }
 
 .formBack {
-    background-color: #444;
+    background-color: #222;
     border-radius: 25px 25px 25px 25px;
     border: 2px outset white;
 }
