@@ -116,6 +116,9 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 			var socket = io();
+			$("#logout").click(function() {
+				socket.emit('logout', {usuario: $('#apelido').val()});
+			});
 
 			$('#enviar_mensagem').click( function(){
 				if($('#mensagem').val() != null && $('#mensagem').val() != "") {
@@ -146,7 +149,7 @@
 				}
 					html += '<h4>' + data.apelido + '</h4>';
 					html += '<p>' + data.mensagem + '</p>';
-					html += '<span class="chatTime">'+dataHora+'</span>';
+					html += '<span>'+dataHora+'</span>';
 				html += '</div>';
 
 				$('#dialogos').append(html);
@@ -169,6 +172,11 @@
 				}
 				
 				$('#pessoas').html(html);
+			});
+
+			socket.on('logoutCliente', function() {
+				console.log('/');
+				window.location.href="/";
 			});
 		</script>
 	</body>

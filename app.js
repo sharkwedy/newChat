@@ -70,6 +70,17 @@ io.on('connection', function(socket){
 		);
 	});
 
+	socket.on('logout', function(data){
+		
+		for(var i=0;i<global.users.length;i++) {
+			if(data.usuario==global.users[i].userName) {
+				global.users[i].status = 'offline';				
+				break;
+			}
+		}
+		socket.emit('logoutCliente');
+	});
+
 });
 
 module.exports = app;
