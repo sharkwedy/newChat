@@ -1,11 +1,11 @@
 @charset "utf-8";
 
-body {
+.bodyBackground {
     background-color: #444;
 }
 
 .formBack {
-    background-color: #222;
+    background-color: #111;
     border-radius: 25px 25px 25px 25px;
     border: 2px outset white;
 }
@@ -119,13 +119,13 @@ img {
 .dialogo h4{
 	font-size:15px;
 	font-weight: bold;
-	color:#8B7777;
+	color:#444;
 }
 
 .dialogo p{
 	font-size:12px;
 	padding-left:15px;
-    color:#8B7777;
+    color:#333;
     word-break: break-all;
 }
 
