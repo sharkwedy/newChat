@@ -25,9 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', loginRouter);
 app.use('/newUser', newUserRouter);
 
-var server = app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'));
-});
+var server = app.listen(app.get('port'));
 
 var io = require('socket.io').listen(server);
 
@@ -42,7 +40,6 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('msgParaServidor', function(data){
-
 		/* dialogo */
 		socket.emit(
 			'msgParaCliente', 
@@ -56,8 +53,6 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('atualizaUsers', function(){
-
-		/* dialogo */
 		socket.emit(
 			'atualizaUsersCliente', 
 			{usuarios: global.users}
@@ -70,14 +65,12 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('logout', function(data){
-		
 		for(var i=0;i<global.users.length;i++) {
 			if(data.usuario==global.users[i].userName) {
 				global.users[i].status = 'offline';				
-				break;
+				socket.emit('logoutCliente');
 			}
 		}
-		socket.emit('logoutCliente');
 	});
 
 });

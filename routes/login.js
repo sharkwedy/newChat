@@ -1,32 +1,37 @@
 var express = require('express');
 var router = express.Router();
 
-function authentication (name,pass) {
-  var positionUser = -1;
+function getPosition (name) {
   for(var i=0;i<global.users.length;i++) {
     if(name==global.users[i].userName) {
-      positionUser = i;
-      break;
+      return i;
     }
   }
-  if(positionUser<0) {
-    return -1;
+}
+
+function comparePassword (positionUser,pass) {
+  if( global.users[positionUser].password == pass ) {
+    return positionUser;
   }
   else {
-    if( global.users[i].password == pass ) {
-      return positionUser;
-    }
-    else {
-      return -1;
-    }
+    return -1;
   }
+}
+
+function authentication (name,pass) {
+  var positionUser = getPosition (name);
+  return comparePassword(positionUser,pass);
+}
+
+function setStatusOnline (positionUser) {
+  global.users[positionUser].status = 'online';
 }
 
 router.post('/login',
   function(req, res) {
     var positionUser = authentication(req.body.username, req.body.password);
     if( positionUser >= 0 ) {
-      global.users[positionUser].status ='online';
+      setStatusOnline(positionUser);
       res.render('chat', { usuarios: global.users , id: positionUser});
     }
     else {
