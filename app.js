@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var path = require('path');
 
 var loginRouter = require('./routes/login');
-//var usersRouter = require('./routes/user');
 var newUserRouter = require('./routes/users');
 
 global.users = [];
@@ -84,16 +83,3 @@ io.on('connection', function(socket){
 });
 
 module.exports = app;
-
-/* participantes 
-	if(parseInt(data.apelido_atualizado_nos_clientes) == 0){
-		socket.emit(
-			'participantesParaCliente', 
-			{apelido: data.apelido}
-		);
-
-		socket.broadcast.emit(
-			'participantesParaCliente', 
-			{apelido: data.apelido}
-		);
-	}*/

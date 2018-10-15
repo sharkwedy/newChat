@@ -15,7 +15,6 @@ router.post('/',
     var flag = true;
     for(var i=0;i<global.users.length;i++) {
       if(user.userName==global.users[i].userName) {
-        console.log("usuario já existe");//remover depois
         flag = false;
         res.redirect('/');
       }
@@ -23,7 +22,6 @@ router.post('/',
     if(flag) {
       global.users.push(user);  
     }
-    console.log(global.users);//remover depois
     res.redirect('/');
   }
 );
